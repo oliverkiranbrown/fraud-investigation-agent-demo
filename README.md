@@ -2,9 +2,9 @@
 
 ## Overview
 
-The landscape of financial fraud has been changing rapid in recent years. AI tools have given criminals access to sophisticated tools. They can spin up websites, generate videos or fake documents leaving customers vunerable to new forms of abuse. Banks already operate strong fraud detection systems using classical ML techniques (gradient-boosted trees, network analysis etc) to flag risky transactions. 
+The landscape of financial fraud has been changing rapid in recent years. AI tools have given criminals access to sophisticated tools. They can spin up websites, generate videos or fake documents leaving customers vunerable to new forms of abuse. [Billions are lost](https://www.ukfinance.org.uk/news-and-insight/press-release/fraud-report-2025-press-release) every year. Banks already operate strong fraud detection systems using classical ML techniques (gradient-boosted trees, network analysis etc) to flag risky transaction.
 
-However, decection is only part of the story. Investigation, explanation, escalation and documentation remain heavily human-driven processes. For customers, experiencing fraud can be a terrifying experience. Every year, 300 UK residents are at risk of suicide from the stress and fear induced by fraud. Therefore, every moment saved in resolving a fraud case is precious, translating directly into an improved customer experience, strengthing the reputation of financiual institurions in these moments of great personal distress. 
+However, decection is only part of the story. Investigation, explanation, escalation and documentation remain heavily human-driven processes. For customers, experiencing fraud can be a terrifying experience. Every year, [300 UK residents are at risk of suicide](https://www.lloydsbankinggroup.com/who-we-are/our-strategy/financial-wellbeing/fighting-fraud.html) from the stress and fear induced by fraud. Therefore, every moment saved in resolving a fraud case is precious, translating directly into an improved customer experience, strengthing the reputation of financiual institurions in these moments of great personal distress. 
 
 This repo simulates how AI agents could assist fraud investigators by:
 1. Sythesising all relevant data for a flagged financial transaction
