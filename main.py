@@ -3,35 +3,23 @@ import asyncio
 from pydantic import BaseModel
 from agents import Agent, ModelSettings, RunContextWrapper, Runner, trace
 from agents.tool import function_tool
-from auto_mode import input_with_fallback, confirm_with_fallback
-from openai import OpenAI
+from auto_mode import confirm_with_fallback, input_with_fallback
 from dotenv import load_dotenv, find_dotenv
 
 # load into memory
-load_dotenv(find_dotenv())
+load_dotenv()
 
 API_KEY = os.getenv('OAI_API_KEY')
 
-client = OpenAI(api_key=API_KEY)
+#client = OpenAI(api_key=API_KEY)
 
 """
 Autonomous Anti-Money Laundering / Fraud investigation demo.
-Simulates how an AI agent could investigate a suspicious transaction
+Simulates how an AI agent could investigate a suspicious transaction after an ML system detects a risk
 by pulling data from multiple systems and escalting if needed. 
 
 Follows an example from the OAI docs: 
 https://github.com/openai/openai-agents-python/blob/main/examples/agent_patterns/agents_as_tools_conditional.py#L125
-"""
-
-import asyncio
-from pydantic import BaseModel
-from agents import Agent, ModelSettings, RunContextWrapper, Runner, trace
-from agents.tool import function_tool
-from examples.auto_mode import confirm_with_fallback, input_with_fallback
-
-"""
-Autonomous AML Investigation Agent
-Realistic version: ML systems detect risk, agent performs investigation.
 """
 
 
@@ -65,6 +53,14 @@ async def data_fusion_cross_bank(transaction_id: str) -> str:
     return (
         "Data Fusion insight: Beneficiary account appears in two other banks."
         "Linked to accounts involved in account segregation patterns."
+    )
+
+@function_tool
+async def check_sanctions(transaction_id: str) -> str:
+    # search databases like: https://sanctionslist.ofac.treas.gov/Home/SdnList 
+    return (
+        "Beneficiary name similar to entity on watchlist. "
+        "No direct OFAC match, but close alias detected."
     )
 
 
@@ -107,6 +103,7 @@ Think like a financial crime analyst.
         internal_fraud_model,
         vendor_fraud_platform,
         data_fusion_cross_bank,
+        check_sanctions,
         customer_behavior_profile,
         escalate_to_human,
     ],
@@ -135,10 +132,10 @@ You always base conclusions on tool outputs.
 # ---- Demo Runner ----
 
 async def main():
-    print("\n=== AML Investigation (Realistic Architecture) ===\n")
+    print("\n=== AML Investigation ===\n")
 
     tx_id = input_with_fallback(
-        "Enter suspicious transaction ID: ",
+        "Enter suspicious transaction ID (this would be automated): ",
         "TX-883742"
     )
 
